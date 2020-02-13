@@ -10,6 +10,7 @@
 
 [includeIf "gitdir:*/*munka/"]
 	path = .gitconfig-work
+
 [alias]
 	co = checkout
 	st = status
