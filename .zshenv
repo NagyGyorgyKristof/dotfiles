@@ -7,3 +7,7 @@ elif [ $h -lt 18 ]; then
 else
   /usr/local/bin/figlet -f slant  Good evening Kristof
 fi
+
+
+export ZDOTDIR="$HOME/.config/zsh"
+export EDITOR='subl'
