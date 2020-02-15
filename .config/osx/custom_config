@@ -68,6 +68,21 @@ defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 
+# iterm
+defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
+defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "Activity Monitor" \
+	"Dock" \
+	"Finder" \
+	"Mail"; do
+	killall "${app}" &> /dev/null
+done
+
 ########################
 APPLICATIONS
 ########################
