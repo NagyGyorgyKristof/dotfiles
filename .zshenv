@@ -11,3 +11,4 @@ fi
 
 export ZDOTDIR="$HOME/.config/zsh"
 export EDITOR='subl'
+export SSH_KEY_PATH="$HOME/.ssh/rsa_id"
