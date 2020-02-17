@@ -1,0 +1,116 @@
+#!/bin/bash
+
+printf "=== Starting bootstrap ===\n\n"
+
+ORIGINAL_WORKING_DIR=$(pwd)
+cd $HOME
+
+SYSTEM_TYPE=$(uname -s)
+
+OH_MY_ZSH_ROOT="$HOME/.oh-my-zsh"
+OH_MY_ZSH_CUSTOM="$OH_MY_ZSH_ROOT/custom"
+OH_MY_ZSH_PLUGINS="$OH_MY_ZSH_CUSTOM/plugins"
+
+YADM_SSH_URL="git@github.com:NagyGyorgyKristof/dotfiles.git"
+
+confirm() {
+    # call with a prompt string or use a default
+    read -r -p "${1:-Are you sure? [y/N]} " response
+    case "$response" in
+    	[yY][eE][sS]|[yY])
+true
+;;
+*)
+false
+;;
+esac
+}
+
+if [ "$SYSTEM_TYPE" = "Darwin" ]; then
+	echo "-> macOs detected"
+	echo "-> Checking system dependencies..."
+
+        # Install zsh
+        if ! command -v zsh > /dev/null 2>&1; then
+        	echo "  -> Installing zsh..."
+        	sudo pacman -S zsh
+        else
+        	echo "  -> zsh already installed..."
+        fi
+
+        echo "-> Checking zsh dependencies..."
+
+    # Install Oh-My-Zsh
+    if [ ! -f "$OH_MY_ZSH_ROOT/oh-my-zsh.sh" ]; then
+    	echo "  -> Installing Oh My Zsh..."
+    	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    else
+    	echo "  -> Oh My Zsh already installed"
+    fi
+
+    # Install zsh-nvm
+    if [ ! -d "$OH_MY_ZSH_PLUGINS/zsh-nvm" ]; then
+    	echo "  -> Installing zsh-nvm..."
+    	git clone https://github.com/lukechilds/zsh-nvm $OH_MY_ZSH_PLUGINS/zsh-nvm
+    else
+    	echo "  -> zsh-nvm already installed"
+    fi
+
+    # Install zsh-autosuggestions
+    if [ ! -d "$OH_MY_ZSH_PLUGINS/zsh-autosuggestions" ]; then
+    	echo "  -> Installing zsh-autosuggestions..."
+    	git clone https://github.com/zsh-users/zsh-autosuggestions $OH_MY_ZSH_PLUGINS/zsh-autosuggestions
+    else
+    	echo "  -> zsh-autosuggestions already installed"
+    fi
+
+    # Install zsh-syntax-highlighting
+    if [ ! -d "$OH_MY_ZSH_PLUGINS/zsh-syntax-highlighting" ]; then
+    	echo "  -> Installing zsh-syntax-highlighting..."
+    	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $OH_MY_ZSH_PLUGINS/zsh-syntax-highlighting
+    else
+    	echo "  -> zsh-syntax-highlighting already installed"
+    fi
+
+    # change the git url TODO!
+    if [ ! -d "$OH_MY_ZSH_CUSTOM/themes/powerlevel10k" ]; then
+    	echo "  -> Installing powerlevel9k..."
+    	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OH_MY_ZSH_CUSTOM/themes/powerlevel10k
+    else
+
+    	echo "  -> powerlevel10k already installed"
+    fi
+
+
+    if [ ! -d "$OH_MY_ZSH_CUSTOM/themes/powerlevel10k" ]; then
+    	echo "  -> Installing sublime..."
+		brew cask install sublime-text
+		ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/
+	else 
+		echo "  -> sublime already installed"
+    fi
+
+    confirm "-> Change macOs default settings? [y/n]" && {
+    	printf "\n  -> Updating macOs default settings\n";
+    	source ~/.config/osx/macos.sh
+    }
+
+fi
+
+if [ -f "$HOME/.config/yadm/files.gpg" ]; then
+	confirm "-> Decrypt files? [y/n]" && {
+		printf "\n  -> Decrypting files...\n";
+		yadm decrypt;
+	}
+fi
+
+if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
+	confirm "-> Change yadm URL to SSH? [y/n]" && {
+		printf "\n  -> Updating the yadm repo origin URL\n";
+		yadm remote set-url origin "$YADM_SSH_URL";
+	}
+fi
+
+cd $ORIGINAL_WORKING_DIR
+
+printf "\n=== Finished bootstrap ===\n"
