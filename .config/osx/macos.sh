@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
@@ -88,66 +86,66 @@ for app in "Activity Monitor" \
 done
 
 ########################
-APPLICATIONS
+# APPLICATIONS  (application installations should be placed in the bootstap file)  
 ########################
 
 ##home-brew
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 #cask
-brew install cask
+#brew install cask
 
 #sublime text
-brew cask install sublime-text
+#brew cask install sublime-text
 
 #lf
-brew install lf
+#brew install lf
 
 #jetbrains-toolbox
-brew cask install jetbrains-toolbox
+#brew cask install jetbrains-toolbox
 
 #itsycal
-brew cask install itsycal
+#brew cask install itsycal
 
 #appcleaner
-brew cask install appcleaner
+#brew cask install appcleaner
 
 #google-chrome
-brew cask install google-chrome
+#brew cask install google-chrome
 
 #lol
-brew cask install league-of-legends
+#brew cask install league-of-legends
 
 #postman
-brew cask install postman 
+#brew cask install postman 
 
 #nightowl
-brew cask intsall nightowl
+#brew cask intsall nightowl
 
 #franz
-brew cask install franz
+#brew cask install franz
 
 #iterm2
-brew cask intsall iterm2
+#brew cask intsall iterm2
 
 #vanilla
-brew cask install vanilla
+#brew cask install vanilla
 
 #vlc
-brew cask install vlc
+#brew cask install vlc
 
 #viber
-brew cask install viber
+#brew cask install viber
 
 #helium
-brew cask install helium
+#brew cask install helium
 
 #adobe-connect
-brew cask install adobe-connect
+#brew cask install adobe-connect
 
 #hyperswitch
-brew cask install hyperswitch
+#brew cask install hyperswitch
 
 #google-backup-and-sync
-brew cask install google-backup-and-sync
+#brew cask install google-backup-and-sync
 

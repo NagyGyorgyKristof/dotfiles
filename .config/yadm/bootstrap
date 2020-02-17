@@ -30,15 +30,26 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
 	echo "-> macOs detected"
 	echo "-> Checking system dependencies..."
 
-        # Install zsh
-        if ! command -v zsh > /dev/null 2>&1; then
-        	echo "  -> Installing zsh..."
-        	sudo pacman -S zsh
-        else
-        	echo "  -> zsh already installed..."
-        fi
+    echo " -> Install Homebrew package manager"
 
-        echo "-> Checking zsh dependencies..."
+    #Install home-brew
+    if [[ $(command -v brew) == "" ]]; then
+        echo " ->Installing Hombrew..."
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    else
+        echo "Updating Homebrew"
+        brew update
+    fi
+
+        # Install zsh
+    if [ ! command -v zsh > /dev/null 2>&1 ]; then
+    	echo "  -> Installing zsh..."
+    	brew install zsh
+    else
+    	echo "  -> zsh already installed..."
+    fi
+
+    echo "-> Checking zsh dependencies..."
 
     # Install Oh-My-Zsh
     if [ ! -f "$OH_MY_ZSH_ROOT/oh-my-zsh.sh" ]; then
@@ -72,7 +83,7 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     	echo "  -> zsh-syntax-highlighting already installed"
     fi
 
-    # change the git url TODO!
+    #Install powerlevel10k
     if [ ! -d "$OH_MY_ZSH_CUSTOM/themes/powerlevel10k" ]; then
     	echo "  -> Installing powerlevel9k..."
     	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OH_MY_ZSH_CUSTOM/themes/powerlevel10k
@@ -81,18 +92,81 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     	echo "  -> powerlevel10k already installed"
     fi
 
+     echo " -> Install esential applications"
 
-    if [ ! -d "$OH_MY_ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    	echo "  -> Installing sublime..."
-		brew cask install sublime-text
-		ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/
-	else 
-		echo "  -> sublime already installed"
+    #Install iterm2
+    if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
+        echo "  -> Installing iterm2..."
+        brew cask install iterm2
+        echo "  -> Load preferences..."
+
+        defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
+        defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
+    else 
+        echo "  -> iterm2 already installed"
     fi
 
+    #Install lf
+   if [ ! command -v lf > /dev/null 2>&1 ]; then
+        echo" -> Install lf"
+        brew install lf
+    else
+        echo "  -> lf already installed"
+    fi 
+
+    #Install sublime-text
+    if [ ! -d '/Applications/Sublime Text.app' -a ! -d "$HOME/Applications/Sublime Text.app" ]; then
+    	echo "  -> Installing sublime..."
+        brew cask install sublime-text
+        ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/
+    else 
+        echo "  -> sublime already installed"
+    fi
+
+    #Install appcleaner
+   if [ ! brew cask list appcleaner ]; then
+        echo" -> Install appcleaner"
+        brew cask install appcleaner
+    else
+        echo "  -> appcleaner already installed"
+    fi   
+
+     #Install jetbrains-toolbox
+   if [ ! brew cask list  jetbrains-toolbox ]; then
+        echo" -> Install  jetbrains-toolbox"
+        brew cask install  jetbrains-toolbox
+    else
+        echo "  ->  jetbrains-toolbox already installed"
+    fi
+
+    #Install google-chrome
+   if [ ! brew cask list  google-chrome ]; then
+        echo" -> Install  google-chrome"
+        brew cask install  google-chrome
+    else
+        echo "  ->  google-chrome already installed"
+    fi 
+
+     #Install franz
+   if [ ! brew cask list franz ]; then
+        echo" -> Install franz"
+        brew cask install franz
+    else
+        echo "  -> franz already installed"
+    fi     
+
+     #Install franz
+   if [ ! brew cask list firefox ]; then
+        echo" -> Install franz"
+        brew cask install firefox
+    else
+        echo "  -> firefox already installed"
+    fi 
+
+    #source macOs config
     confirm "-> Change macOs default settings? [y/n]" && {
-    	printf "\n  -> Updating macOs default settings\n";
-    	source ~/.config/osx/macos.sh
+       printf "\n  -> Updating macOs default settings\n";
+       source ~/.config/osx/macos.sh
     }
 
 fi
