@@ -42,12 +42,9 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     fi
 
         # Install zsh
-    if [ ! command -v zsh > /dev/null 2>&1 ]; then
     	echo "  -> Installing zsh..."
     	brew install zsh
-    else
-    	echo "  -> zsh already installed..."
-    fi
+    	chsh -s /bin/zsh
 
     echo "-> Checking zsh dependencies..."
 
@@ -114,11 +111,6 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         echo "  -> iterm2 already installed"
     fi
 
-    #Install lf
-    echo "  -> Installing iterm2..."
-    brew install lf
-    
-
     #Install sublime-text
     if [ ! -d '/Applications/Sublime Text.app' -a ! -d "$HOME/Applications/Sublime Text.app" ]; then
     	echo "  -> Installing sublime..."
@@ -128,45 +120,30 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         echo "  -> sublime already installed"
     fi
 
+        #Install lf
+    echo "  -> Installing lf..."
+    brew install lf
+    
+
     #Install appcleaner
-   if [ ! brew cask list appcleaner ]; then
-        echo" -> Install appcleaner"
-        brew cask install appcleaner
-    else
-        echo "  -> appcleaner already installed"
-    fi   
+     echo" -> Install appcleaner"
+     brew cask install appcleaner
+    
 
      #Install jetbrains-toolbox
-   if [ ! brew cask list  jetbrains-toolbox ]; then
-        echo" -> Install  jetbrains-toolbox"
-        brew cask install  jetbrains-toolbox
-    else
-        echo "  ->  jetbrains-toolbox already installed"
-    fi
+     echo" -> Install  jetbrains-toolbox"
+     brew cask install  jetbrains-toolbox
+  
 
     #Install google-chrome
-   if [ ! brew cask list  google-chrome ]; then
-        echo" -> Install  google-chrome"
-        brew cask install  google-chrome
-    else
-        echo "  ->  google-chrome already installed"
-    fi 
+     echo" -> Install  google-chrome"
+     brew cask install  google-chrome
+  
 
      #Install franz
-   if [ ! brew cask list franz ]; then
-        echo" -> Install franz"
-        brew cask install franz
-    else
-        echo "  -> franz already installed"
-    fi     
-
-     #Install franz
-   if [ ! brew cask list firefox ]; then
-        echo" -> Install franz"
-        brew cask install firefox
-    else
-        echo "  -> firefox already installed"
-    fi 
+     echo" -> Install franz"
+     brew cask install franz
+    
 
     #source macOs config
     confirm "-> Change macOs default settings? [y/n]" && {
