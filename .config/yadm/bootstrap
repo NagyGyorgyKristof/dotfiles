@@ -94,6 +94,14 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
 
      echo " -> Install esential applications"
 
+    # Install gpg
+    if [ ! command -v gpg > /dev/null 2>&1 ]; then
+        echo "  -> Installing gpg..."
+        brew install gpg
+    else
+        echo "  -> zsh already installed..."
+    fi
+
     #Install iterm2
     if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
         echo "  -> Installing iterm2..."
@@ -107,12 +115,9 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     fi
 
     #Install lf
-   if [ ! command -v lf > /dev/null 2>&1 ]; then
-        echo" -> Install lf"
-        brew install lf
-    else
-        echo "  -> lf already installed"
-    fi 
+    echo "  -> Installing iterm2..."
+    brew install lf
+    
 
     #Install sublime-text
     if [ ! -d '/Applications/Sublime Text.app' -a ! -d "$HOME/Applications/Sublime Text.app" ]; then
