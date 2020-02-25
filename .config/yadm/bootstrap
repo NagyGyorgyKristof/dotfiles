@@ -125,26 +125,6 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         brew install lf
    }
     
-    #Install appcleaner
-     echo" -> Install appcleaner"
-     brew cask install appcleaner
-    
-
-     #Install jetbrains-toolbox
-     echo" -> Install  jetbrains-toolbox"
-     brew cask install  jetbrains-toolbox
-  
-
-    #Install google-chrome
-     echo" -> Install  google-chrome"
-     brew cask install  google-chrome
-  
-
-     #Install franz
-     echo" -> Install franz"
-     brew cask install franz
-    
-
     #source macOs config
     confirm "-> Change macOs default settings? [y/n]" && {
        printf "\n  -> Updating macOs default settings\n";
