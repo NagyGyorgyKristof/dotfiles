@@ -41,10 +41,12 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         brew update
     fi
 
-        # Install zsh
-    	echo "  -> Installing zsh..."
-    	brew install zsh
-    	chsh -s /bin/zsh
+    # Install zsh
+     command -v zsh > /dev/null 2>&1  &&  echo "  -> zsh installed" || {
+        echo "  -> Installing zsh"
+        brew install zsh
+        chsh -s /bin/zsh
+     }
 
     echo "-> Checking zsh dependencies..."
 
@@ -85,19 +87,16 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     	echo "  -> Installing powerlevel9k..."
     	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OH_MY_ZSH_CUSTOM/themes/powerlevel10k
     else
-
-    	echo "  -> powerlevel10k already installed"
+        echo "  -> powerlevel10k already installed"
     fi
 
-     echo " -> Install esential applications"
+    echo " -> Install esential applications"
 
     # Install gpg
-    if [ ! command -v gpg > /dev/null 2>&1 ]; then
+     command -v gpg > /dev/null 2>&1  &&  echo "  -> gpg installed" || {
         echo "  -> Installing gpg..."
         brew install gpg
-    else
-        echo "  -> zsh already installed..."
-    fi
+    }
 
     #Install iterm2
     if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
@@ -120,11 +119,12 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         echo "  -> sublime already installed"
     fi
 
-        #Install lf
-    echo "  -> Installing lf..."
-    brew install lf
+    #Install lf
+    command -v lf > /dev/null 2>&1  &&  echo "  -> lf installed" || {
+        echo "  -> Installing lf..."
+        brew install lf
+   }
     
-
     #Install appcleaner
      echo" -> Install appcleaner"
      brew cask install appcleaner
@@ -163,7 +163,7 @@ fi
 if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
 	confirm "-> Change yadm URL to SSH? [y/n]" && {
 		printf "\n  -> Updating the yadm repo origin URL\n";
-		yadm remote set-url origin "$YADM_SSH_URL";
+		yadm remote add origin "$YADM_SSH_URL";
 	}
 fi
 
