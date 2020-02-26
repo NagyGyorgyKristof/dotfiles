@@ -138,7 +138,7 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
         confirm "-> Change yadm URL to SSH? [y/n]" && {
             printf "\n  -> Updating the yadm repo origin URL\n";
-            yadm remote add origin "$YADM_SSH_URL";
+            yadm remote set-url origin "$YADM_SSH_URL";
         }
     fi
 
@@ -153,7 +153,7 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
                 defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
 
                 echo "  -> Open iterm2"
-                open -a iterm2
+                open -a iterm
             }
         
     else 
@@ -162,7 +162,9 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
 
 fi
 
-
 cd $ORIGINAL_WORKING_DIR
 
 printf "\n=== Finished bootstrap ===\n"
+
+osascript -e 'quit app "Terminal"'
+
