@@ -103,18 +103,6 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         brew install gpg
     }
 
-    #Install iterm2
-    if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
-        echo "  -> Installing iterm2..."
-        brew cask install iterm2
-        echo "  -> Load preferences..."
-
-        defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
-        defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
-    else 
-        echo "  -> iterm2 already installed"
-    fi
-
     #Install sublime-text
     if [ ! -d '/Applications/Sublime Text.app' -a ! -d "$HOME/Applications/Sublime Text.app" ]; then
     	echo "  -> Installing sublime..."
@@ -140,21 +128,40 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
        source ~/.config/osx/macos.sh
     }
 
+    if [ -f "$HOME/.config/yadm/files.gpg" ]; then
+    confirm "-> Decrypt files? [y/n]" && {
+        printf "\n  -> Decrypting files...\n";
+        yadm decrypt;
+    }
+    fi
+
+    if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
+        confirm "-> Change yadm URL to SSH? [y/n]" && {
+            printf "\n  -> Updating the yadm repo origin URL\n";
+            yadm remote add origin "$YADM_SSH_URL";
+        }
+    fi
+
+       #Install iterm2
+    if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
+        confirm "-> Do you want to install iterm2 ? [y/n]" && {
+                echo "  -> Installing iterm2..."
+                brew cask install iterm2
+
+                echo "  -> Load preferences..."
+                defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
+                defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
+
+                echo "  -> Open iterm2"
+                open -a iterm2
+            }
+        
+    else 
+        echo "  -> iterm2 already installed"
+    fi
+
 fi
 
-if [ -f "$HOME/.config/yadm/files.gpg" ]; then
-	confirm "-> Decrypt files? [y/n]" && {
-		printf "\n  -> Decrypting files...\n";
-		yadm decrypt;
-	}
-fi
-
-if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
-	confirm "-> Change yadm URL to SSH? [y/n]" && {
-		printf "\n  -> Updating the yadm repo origin URL\n";
-		yadm remote add origin "$YADM_SSH_URL";
-	}
-fi
 
 cd $ORIGINAL_WORKING_DIR
 
