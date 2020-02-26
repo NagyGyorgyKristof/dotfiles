@@ -51,11 +51,9 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
      command -v zsh > /dev/null 2>&1  &&  echo "  -> zsh installed" || {
         echo "  -> Installing zsh"
         brew install zsh
-        chsh -s /bin/zsh
      }
 
     echo "-> Checking zsh dependencies..."
-
 
  # Install zsh-nvm
     if [ ! -d "$OH_MY_ZSH_CUSTOM_PLUGINS/zsh-nvm" ]; then
@@ -91,8 +89,8 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
 
     # Install Oh-My-Zsh
     if [ ! -f "$OH_MY_ZSH_ROOT/oh-my-zsh.sh" ]; then
-    	echo "  -> Installing Oh My Zsh..."
-    	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    	echo "  -> Installing Oh My Zsh..." 
+    	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     else
     	echo "  -> Oh My Zsh already installed"
     fi
@@ -131,6 +129,10 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         echo "  -> Installing lf..."
         brew install lf
    }   
+
+    confirm "-> Change the default shell to zsh? [y/n]" && {
+        chsh -s $(which zsh)
+    }
 
     #source macOs config
     confirm "-> Change macOs default settings? [y/n]" && {
