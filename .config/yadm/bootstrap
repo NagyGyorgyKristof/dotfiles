@@ -7,9 +7,15 @@ cd $HOME
 
 SYSTEM_TYPE=$(uname -s)
 
+if [ ! -d "$HOME/zsh_custom" ]; then
+        mkdir -p $HOME/zsh_custom/plugins
+        mkdir -p $HOME/zsh_custom/themes    
+fi
+
 OH_MY_ZSH_ROOT="$HOME/.oh-my-zsh"
-OH_MY_ZSH_CUSTOM="$OH_MY_ZSH_ROOT/custom"
-OH_MY_ZSH_PLUGINS="$OH_MY_ZSH_CUSTOM/plugins"
+OH_MY_ZSH_CUSTOM="$HOME/zsh_custom"
+OH_MY_ZSH_CUSTOM_PLUGINS="$OH_MY_ZSH_CUSTOM/plugins"
+OH_MY_ZSH_CUSTOM_THEMES="$OH_MY_ZSH_CUSTOM/themes"
 
 YADM_SSH_URL="git@github.com:NagyGyorgyKristof/dotfiles.git"
 
@@ -45,49 +51,48 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
      command -v zsh > /dev/null 2>&1  &&  echo "  -> zsh installed" || {
         echo "  -> Installing zsh"
         brew install zsh
-        chsh -s /bin/zsh
      }
 
     echo "-> Checking zsh dependencies..."
 
-    # Install Oh-My-Zsh
-    if [ ! -f "$OH_MY_ZSH_ROOT/oh-my-zsh.sh" ]; then
-    	echo "  -> Installing Oh My Zsh..."
-    	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ # Install zsh-nvm
+    if [ ! -d "$OH_MY_ZSH_CUSTOM_PLUGINS/zsh-nvm" ]; then
+        echo "  -> Installing zsh-nvm..."
+        git clone https://github.com/lukechilds/zsh-nvm $OH_MY_ZSH_CUSTOM_PLUGINS/zsh-nvm
     else
-    	echo "  -> Oh My Zsh already installed"
-    fi
-
-    # Install zsh-nvm
-    if [ ! -d "$OH_MY_ZSH_PLUGINS/zsh-nvm" ]; then
-    	echo "  -> Installing zsh-nvm..."
-    	git clone https://github.com/lukechilds/zsh-nvm $OH_MY_ZSH_PLUGINS/zsh-nvm
-    else
-    	echo "  -> zsh-nvm already installed"
+        echo "  -> zsh-nvm already installed"
     fi
 
     # Install zsh-autosuggestions
-    if [ ! -d "$OH_MY_ZSH_PLUGINS/zsh-autosuggestions" ]; then
-    	echo "  -> Installing zsh-autosuggestions..."
-    	git clone https://github.com/zsh-users/zsh-autosuggestions $OH_MY_ZSH_PLUGINS/zsh-autosuggestions
+    if [ ! -d "$OH_MY_ZSH_CUSTOM_PLUGINS/zsh-autosuggestions" ]; then
+        echo "  -> Installing zsh-autosuggestions..."
+        git clone https://github.com/zsh-users/zsh-autosuggestions $OH_MY_ZSH_CUSTOM_PLUGINS/zsh-autosuggestions
     else
-    	echo "  -> zsh-autosuggestions already installed"
+        echo "  -> zsh-autosuggestions already installed"
     fi
 
     # Install zsh-syntax-highlighting
-    if [ ! -d "$OH_MY_ZSH_PLUGINS/zsh-syntax-highlighting" ]; then
-    	echo "  -> Installing zsh-syntax-highlighting..."
-    	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $OH_MY_ZSH_PLUGINS/zsh-syntax-highlighting
+    if [ ! -d "$OH_MY_ZSH_CUSTOM_PLUGINS/zsh-syntax-highlighting" ]; then
+        echo "  -> Installing zsh-syntax-highlighting..."
+        git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $OH_MY_ZSH_CUSTOM_PLUGINS/zsh-syntax-highlighting
     else
-    	echo "  -> zsh-syntax-highlighting already installed"
+        echo "  -> zsh-syntax-highlighting already installed"
     fi
 
     #Install powerlevel10k
     if [ ! -d "$OH_MY_ZSH_CUSTOM/themes/powerlevel10k" ]; then
-    	echo "  -> Installing powerlevel9k..."
-    	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OH_MY_ZSH_CUSTOM/themes/powerlevel10k
+        echo "  -> Installing powerlevel10k..."
+        git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $OH_MY_ZSH_CUSTOM_THEMES/powerlevel10k
     else
         echo "  -> powerlevel10k already installed"
+    fi
+
+    # Install Oh-My-Zsh
+    if [ ! -f "$OH_MY_ZSH_ROOT/oh-my-zsh.sh" ]; then
+    	echo "  -> Installing Oh My Zsh..." 
+    	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    else
+    	echo "  -> Oh My Zsh already installed"
     fi
 
     echo " -> Install esential applications"
@@ -97,18 +102,6 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
         echo "  -> Installing gpg..."
         brew install gpg
     }
-
-    #Install iterm2
-    if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
-        echo "  -> Installing iterm2..."
-        brew cask install iterm2
-        echo "  -> Load preferences..."
-
-        defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
-        defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
-    else 
-        echo "  -> iterm2 already installed"
-    fi
 
     #Install sublime-text
     if [ ! -d '/Applications/Sublime Text.app' -a ! -d "$HOME/Applications/Sublime Text.app" ]; then
@@ -123,30 +116,55 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     command -v lf > /dev/null 2>&1  &&  echo "  -> lf installed" || {
         echo "  -> Installing lf..."
         brew install lf
-   }
-    
+   }   
+
+    confirm "-> Change the default shell to zsh? [y/n]" && {
+        chsh -s $(which zsh)
+    }
+
     #source macOs config
     confirm "-> Change macOs default settings? [y/n]" && {
        printf "\n  -> Updating macOs default settings\n";
        source ~/.config/osx/macos.sh
     }
 
-fi
+    if [ -f "$HOME/.config/yadm/files.gpg" ]; then
+    confirm "-> Decrypt files? [y/n]" && {
+        printf "\n  -> Decrypting files...\n";
+        yadm decrypt;
+    }
+    fi
 
-if [ -f "$HOME/.config/yadm/files.gpg" ]; then
-	confirm "-> Decrypt files? [y/n]" && {
-		printf "\n  -> Decrypting files...\n";
-		yadm decrypt;
-	}
-fi
+    if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
+        confirm "-> Change yadm URL to SSH? [y/n]" && {
+            printf "\n  -> Updating the yadm repo origin URL\n";
+            yadm remote set-url origin "$YADM_SSH_URL";
+        }
+    fi
 
-if [ ! "$(yadm remote get-url origin)" = "$YADM_SSH_URL" ]; then
-	confirm "-> Change yadm URL to SSH? [y/n]" && {
-		printf "\n  -> Updating the yadm repo origin URL\n";
-		yadm remote add origin "$YADM_SSH_URL";
-	}
+       #Install iterm2
+    if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
+        confirm "-> Do you want to install iterm2 ? [y/n]" && {
+                echo "  -> Installing iterm2..."
+                brew cask install iterm2
+
+                echo "  -> Load preferences..."
+                defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"
+                defaults write com.googlecode.iterm2 "LoadPrefsFromCustomFolder" -bool true
+
+                echo "  -> Open iterm2"
+                open -a iterm
+            }
+        
+    else 
+        echo "  -> iterm2 already installed"
+    fi
+
 fi
 
 cd $ORIGINAL_WORKING_DIR
 
 printf "\n=== Finished bootstrap ===\n"
+
+osascript -e 'quit app "Terminal"'
+
