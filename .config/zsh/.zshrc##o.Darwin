@@ -90,6 +90,7 @@ plugins=(
     brew
     docker
     zsh-syntax-highlighting
+    docker-compose
 )
 
 source $ZSH/oh-my-zsh.sh
