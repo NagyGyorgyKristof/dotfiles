@@ -10,11 +10,15 @@ lol () {
     ./LeagueClient.app/Contents/MacOS/LeagueClient
 }
 
-#open a file with EDITOR
-open(){
-	$EDITOR $1
+#pi
+pi () {
+    open vnc://pi:raspberry@192.168.1.122:5901 
 }
 
+#open a file with EDITOR
+subl(){
+	$EDITOR $1
+}
 #Decide whether an application is installed on macOs
 whichapp() {
   local appNameOrBundleId=$1 isAppName=0 bundleId
