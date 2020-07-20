@@ -7,7 +7,7 @@ cd $HOME
 
 SYSTEM_TYPE=$(uname -s)
 
-if [ ! -d "$HOME/zsh_custom" ]; then
+if [ ! -d "$HOME/custom" ]; then
         mkdir -p $HOME/zsh_custom/plugins
         mkdir -p $HOME/zsh_custom/themes    
 fi
