@@ -79,7 +79,7 @@ bindkey '^e' edit-command-line
 
 #====== Other configuration
 
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 # export JAVA_HOME=/usr/lib/jvm/jdk-jetbrains
 #export GEM_HOME=$(gem env | grep 'USER INSTALLATION DIRECTORY' | sed 's/.*: //')
 export GOPATH="$HOME/apps/go"
