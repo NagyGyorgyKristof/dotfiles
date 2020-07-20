@@ -7,13 +7,14 @@ cd $HOME
 
 SYSTEM_TYPE=$(uname -s)
 
-if [ ! -d "$HOME/zsh_custom" ]; then
-        mkdir -p $HOME/zsh_custom/plugins
-        mkdir -p $HOME/zsh_custom/themes    
+OH_MY_ZSH_CUSTOM="$HOME/zsh_custom"
+
+if [ ! -d "$HOME/OH_MY_ZSH_CUSTOM" ]; then
+        mkdir -p $HOME/OH_MY_ZSH_CUSTOM/plugins
+        mkdir -p $HOME/OH_MY_ZSH_CUSTOM/themes    
 fi
 
 OH_MY_ZSH_ROOT="$HOME/.oh-my-zsh"
-OH_MY_ZSH_CUSTOM="$HOME/zsh_custom"
 OH_MY_ZSH_CUSTOM_PLUGINS="$OH_MY_ZSH_CUSTOM/plugins"
 OH_MY_ZSH_CUSTOM_THEMES="$OH_MY_ZSH_CUSTOM/themes"
 
