@@ -2,7 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # Source common config
-source $ZDOTDIR/.zshcommon
+source $ZDOTDIR/.zsh_custom_linux
 source $ZDOTDIR/.powerlevel9k
 
 # Override common config
