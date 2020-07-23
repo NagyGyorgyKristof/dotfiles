@@ -91,6 +91,10 @@ plugins=(
     docker
     zsh-syntax-highlighting
     docker-compose
+    autojump
+    colorize
+    colored-man-pages
+
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -135,3 +139,5 @@ lfcd () {
         fi
     fi
 }
+bindkey -s '^l' 'lfcd\n'
+

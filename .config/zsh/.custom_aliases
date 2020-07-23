@@ -16,7 +16,7 @@ pi () {
 }
 
 #open a file with EDITOR
-subl(){
+open(){
 	$EDITOR $1
 }
 #Decide whether an application is installed on macOs

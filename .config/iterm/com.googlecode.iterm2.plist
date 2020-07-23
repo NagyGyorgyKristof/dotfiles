@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AlternateMouseScroll</key>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>ApplePressAndHoldEnabled</key>
@@ -285,11 +287,11 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>368 366 799 448 0 0 1536 937 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>458 408 620 392 0 0 1536 937 </string>
+	<string>970 498 620 392 0 0 2560 1057 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 0 1276 1057 0 0 2560 1057 </string>
+	<string>336 21 1090 810 0 0 2560 1057 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>867 -919 1090 787 486 -960 1536 937 </string>
+	<string>381 41 1090 787 0 0 1536 937 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1146,9 +1148,10 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.7</string>
-		<string>3.3.8</string>
 		<string>3.3.9</string>
+		<string>3.3.8</string>
+		<string>3.3.11</string>
+		<string>3.3.7</string>
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
@@ -1164,9 +1167,9 @@
 	<key>NoSyncInstallationId</key>
 	<string>0307CA9B-DD4C-4112-BDD8-E5F9807B86F6</string>
 	<key>NoSyncLastTipTime</key>
-	<real>610365848.49700403</real>
+	<real>611768124.28356695</real>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>299</integer>
+	<integer>415</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1664,11 +1667,11 @@
 		<array>
 			<dict>
 				<key>isTerminal</key>
-				<true/>
+				<false/>
 				<key>name</key>
-				<string>currentSession.pid</string>
+				<string>currentSession</string>
 				<key>nonterminalContext</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -1723,6 +1726,14 @@
 				<true/>
 				<key>name</key>
 				<string>iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -1818,6 +1829,14 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
+				<string>currentSession.pid</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
 				<string>titleOverrideFormat</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
@@ -1862,14 +1881,6 @@
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
-			<dict>
-				<key>isTerminal</key>
-				<false/>
-				<key>name</key>
-				<string>currentSession</string>
-				<key>nonterminalContext</key>
-				<integer>1</integer>
-			</dict>
 		</array>
 		<key>4</key>
 		<array>
@@ -1909,6 +1920,7 @@
 		<string>0009</string>
 		<string>0059</string>
 		<string>0066</string>
+		<string>0073</string>
 		<string>0002</string>
 		<string>0045</string>
 		<string>0038</string>
@@ -1917,6 +1929,7 @@
 		<string>0031</string>
 		<string>0024</string>
 		<string>0067</string>
+		<string>0074</string>
 		<string>0010</string>
 		<string>0046</string>
 		<string>0003</string>
@@ -1926,6 +1939,7 @@
 		<string>0025</string>
 		<string>0018</string>
 		<string>0032</string>
+		<string>0068</string>
 		<string>0011</string>
 		<string>0047</string>
 		<string>0004</string>
@@ -1935,6 +1949,8 @@
 		<string>0026</string>
 		<string>0019</string>
 		<string>0040</string>
+		<string>0069</string>
+		<string>0076</string>
 		<string>0012</string>
 		<string>0048</string>
 		<string>0005</string>
@@ -1943,12 +1959,14 @@
 		<string>0041</string>
 		<string>0034</string>
 		<string>0027</string>
+		<string>0077</string>
 		<string>0013</string>
 		<string>0049</string>
 		<string>0006</string>
 		<string>0020</string>
 		<string>0056</string>
 		<string>0063</string>
+		<string>0070</string>
 		<string>0042</string>
 		<string>0035</string>
 		<string>0028</string>
@@ -1957,6 +1975,7 @@
 		<string>0007</string>
 		<string>0057</string>
 		<string>0064</string>
+		<string>0071</string>
 		<string>0000</string>
 		<string>0029</string>
 		<string>0050</string>
@@ -1967,12 +1986,13 @@
 		<string>0008</string>
 		<string>0058</string>
 		<string>0065</string>
+		<string>0072</string>
 		<string>0001</string>
 		<string>0037</string>
 		<string>000</string>
 		<string>0044</string>
 		<string>0051</string>
-		<string>0068</string>
+		<string>0078</string>
 	</array>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
@@ -2024,11 +2044,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-05-05T10:03:56Z</date>
+	<date>2020-06-09T08:49:27Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>3159639956</integer>
+	<integer>3927195454</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SoundForEsc</key>
@@ -2038,7 +2058,7 @@
 	<key>findMode_iTerm</key>
 	<integer>0</integer>
 	<key>iTerm Version</key>
-	<string>3.3.9</string>
+	<string>3.3.11</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
