@@ -88,6 +88,6 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-bindkey -s '^o' 'lfcd\n'
+bindkey -s '^l' 'lfcd\n'
 
 export PATH="$HOME/.local/bin":$PATH

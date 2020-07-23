@@ -10,8 +10,8 @@ SYSTEM_TYPE=$(uname -s)
 OH_MY_ZSH_CUSTOM="$HOME/custom"
 
 if [ ! -d "$HOME/OH_MY_ZSH_CUSTOM" ]; then
-        mkdir -p $HOME/OH_MY_ZSH_CUSTOM/plugins
-        mkdir -p $HOME/OH_MY_ZSH_CUSTOM/themes    
+        mkdir -p $HOME/custom/plugins
+        mkdir -p $HOME/custom/themes    
 fi
 
 OH_MY_ZSH_ROOT="$HOME/.oh-my-zsh"
