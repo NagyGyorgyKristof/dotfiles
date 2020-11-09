@@ -47,3 +47,10 @@ alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_231)"
 alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
 #open zhsrc
 alias zshrc="open $ZDOTDIR/.zshrc"
+
+#open pentaho
+pentaho(){
+  j8
+  cd Applications/data-integration/Data\ Integration.app/Contents/MacOS
+  ./JavaApplicationStub
+}
