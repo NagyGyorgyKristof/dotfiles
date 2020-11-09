@@ -10,11 +10,6 @@ lol () {
     ./LeagueClient.app/Contents/MacOS/LeagueClient
 }
 
-#pi
-pi () {
-	ssh pi@rpi1
-}
-
 #open a file with EDITOR
 open(){
 	$EDITOR $1
