@@ -90,4 +90,9 @@ lfcd () {
 }
 bindkey -s '^l' 'lfcd\n'
 
+#unix timestamp
+unixtime(){
+	date +%s
+}
+
 export PATH="$HOME/.local/bin":$PATH

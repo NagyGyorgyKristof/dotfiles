@@ -10,6 +10,12 @@ lol () {
     ./LeagueClient.app/Contents/MacOS/LeagueClient
 }
 
+
+#unix timestamp
+unixtime(){
+	date +%s
+}
+
 #open a file with EDITOR
 open(){
 	$EDITOR $1
