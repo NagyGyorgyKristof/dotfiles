@@ -8,7 +8,7 @@
 [includeIf "gitdir:*/*private/"]
 	path = .gitconfig-personal
 
-[includeIf "gitdir:*/*munka/"]
+[includeIf "gitdir:*/*work/"]
 	path = .gitconfig-work
 
 [alias]
