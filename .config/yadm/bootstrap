@@ -107,7 +107,7 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     #Install sublime-text
     if [ ! -d '/Applications/Sublime Text.app' -a ! -d "$HOME/Applications/Sublime Text.app" ]; then
     	echo "  -> Installing sublime..."
-        brew cask install sublime-text
+        brew install sublime-text
         ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/
     else 
         echo "  -> sublime already installed"
@@ -147,7 +147,7 @@ if [ "$SYSTEM_TYPE" = "Darwin" ]; then
     if [ ! -d '/Applications/iTerm.app' -a ! -d "$HOME/Applications/iTerm.app" ]; then
         confirm "-> Do you want to install iterm2 ? [y/n]" && {
                 echo "  -> Installing iterm2..."
-                brew cask install iterm2
+                brew install iterm2
 
                 echo "  -> Load preferences..."
                 defaults write com.googlecode.iterm2 "PrefsCustomFolder" -string "$HOME/.config/iterm"

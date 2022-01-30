@@ -20,6 +20,7 @@ unixtime(){
 open(){
 	$EDITOR $1
 }
+
 #Decide whether an application is installed on macOs
 whichapp() {
   local appNameOrBundleId=$1 isAppName=0 bundleId
@@ -44,14 +45,9 @@ whichapp() {
 }
 
 # java
-alias j8="export JAVA_HOME=$(/usr/libexec/java_home -v 1.8.0_231)"
-alias j11="export JAVA_HOME=$(/usr/libexec/java_home -v 11)"
-#open zhsrc
-alias zshrc="open $ZDOTDIR/.zshrc"
+alias j11="export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home"
+alias j17="export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home"
 
-#open pentaho
-pentaho(){
-  j8
-  cd Applications/data-integration/Data\ Integration.app/Contents/MacOS
-  ./JavaApplicationStub
-}
+#open zhsrc
+alias subl="open -a /Applications/Sublime\ Text.app" 
+alias zshrc="open $ZDOTDIR/.zshrc"
